@@ -1,0 +1,17 @@
+
+-- Queries
+
+-- get number of problems solved in codekata by the users
+select u.user_id, u.email, u.username, u.first_name, count(c.problem_id) as total_problems_solved from users u, codekata c where u.user_id = c.user_id group by u.user_id;
+
+-- display the number of company drives attended by the users
+select u.user_id, u.email, u.username, u.first_name, count(c.company_id) as drives_attended from users u, company_drives c where u.user_id = c.user_id group by u.user_id;
+
+-- combine and display students_activated_courses and courses for a specific user grouping them based on the course
+select c.course_id, c.course_name, c.completion_time_hrs, count(s.user_id) as users_enrolled from courses c LEFT JOIN student_activated_courses s ON c.course_id = s.course_id group by c.course_id;
+
+-- list all the mentors
+select * from mentors;
+
+-- list the number of students that are assigned for a mentor
+select count(*) from users where mentor_id is NOT NULL;
